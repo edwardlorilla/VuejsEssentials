@@ -32,22 +32,36 @@
 <body>
 
 
-<div id="app">
-    <p v-bind:class='{red_font: switch_toggle, blue_background:true}'>
+<div id='app'>
+    <button @click="toggleRedFont = !toggleRedFont ">Toggle red font</button>
+    <button @click="toggleBlueBackground = !toggleBlueBackground ">Toggle Blue Background</button>
+    <button @click="toggleHeavyFont = !toggleHeavyFont ">Toggle Heavy Font</button>
+    <p v-bind:class='classObject'>
         I am a P tag...
     </p>
-    <button @click="switch_toggle = !switch_toggle">Toggle Red Font</button>
 </div>
 
 <script lang="javascript">
     new Vue({
         el: "#app",
         data: {
-            switch_toggle: true
+            toggleRedFont: false,
+            toggleBlueBackground: false,
+            toggleHeavyFont: false
         },
-        computed: {},
+        computed: {
+            classObject:function(){
+                var vm = this
+                return {
+                    red_font: vm.toggleRedFont,
+                    blue_background: vm.toggleBlueBackground,
+                    heavy_font : vm.toggleHeavyFont
+                }
+            }
+        },
         methods: {}
     });
+
 </script>
 </body>
 </html>
