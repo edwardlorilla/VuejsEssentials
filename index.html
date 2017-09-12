@@ -9,28 +9,55 @@
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
+    <style>
+        h1, div, p, span {
+            font-size: 18px;
+            font-family: helvetica;
+        }
+        body {
+            padding: 33px;
+        }
+        span {
+            line-height: 20px;
+        }
+        input {
+            line-height: 20px;
+            font-size: 18px;
+            width: 96px;
+        }
+        .warning {
+            border: red solid 2px;
+        }
 
+    </style>
 </head>
 <body>
 
-
-<div id="app">
-    <input type="text" v-on:input="checkInput" v-model="textMessage">
+<div id='app'>
+    <input v-bind:class='{warning:!remain}' v-model='message' v-on:input='check' />
+    <span>{{remain}}/{{limit}}</span><!-- remain: how many characters left. limit: maximum character number-->
 </div>
 
 <script lang="javascript">
     new Vue({
-        el: "#app",
-        data: {
-            textMessage: "hello there"
+        el:'#app',
+        data:{
+            message:'',
+            limit:9,
         },
-
-        methods: {
-            checkInput:function(){
-                this.textMessage = this.textMessage.substr(0,10)
+        computed:{
+            remain:function(){
+                return this.limit - this.message.length
             }
-        }
-    });
+        },
+        methods:{
+            check:function(){
+                if(this.remain<0){
+                    this.message = this.message.substr(0,this.limit)
+                }
+            }
+        },
+    })
 
 </script>
 </body>
