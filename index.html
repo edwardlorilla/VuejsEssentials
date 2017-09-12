@@ -9,57 +9,27 @@
     <meta name='viewport' content='width=device-width,initial-scale=1.0'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
-    <style>
 
-        h1, div, p, span {
-            font-size: 66px;
-            font-family: helvetica;
-        }
-
-        .red_font {
-            color: red;
-        }
-
-        .blue_background {
-            background: blue;
-        }
-
-        .heavy_font {
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
 
 
-<div id='app'>
-    <button @click="toggleRedFont = !toggleRedFont ">Toggle red font</button>
-    <button @click="toggleBlueBackground = !toggleBlueBackground ">Toggle Blue Background</button>
-    <button @click="toggleHeavyFont = !toggleHeavyFont ">Toggle Heavy Font</button>
-    <p v-bind:class='classObject'>
-        I am a P tag...
-    </p>
+<div id="app">
+    <input type="text" v-on:input="checkInput" v-model="textMessage">
 </div>
 
 <script lang="javascript">
     new Vue({
         el: "#app",
         data: {
-            toggleRedFont: false,
-            toggleBlueBackground: false,
-            toggleHeavyFont: false
+            textMessage: "hello there"
         },
-        computed: {
-            classObject:function(){
-                var vm = this
-                return {
-                    red_font: vm.toggleRedFont,
-                    blue_background: vm.toggleBlueBackground,
-                    heavy_font : vm.toggleHeavyFont
-                }
+
+        methods: {
+            checkInput:function(){
+                this.textMessage = this.textMessage.substr(0,10)
             }
-        },
-        methods: {}
+        }
     });
 
 </script>
